@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fitness Routine Picker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Page header -->
+  <header>
+    <h1>Fitness Routine Picker</h1>
+    <p class="subtitle">Choose a training split and get started today</p>
+  </header>
+
+  <!-- Card grid — each card represents one routine -->
+  <main>
+    <section class="cards" id="cards">
+
+      <div class="card" data-routine="ppl" onclick="showRoutine('ppl')">
+        <div class="card-icon">💪</div>
+        <h2>Push Pull Legs</h2>
+        <p>3–6 days/week</p>
+      </div>
+
+      <div class="card" data-routine="ul" onclick="showRoutine('ul')">
+        <div class="card-icon">🏋️</div>
+        <h2>Upper Lower</h2>
+        <p>4 days/week</p>
+      </div>
+
+      <div class="card" data-routine="fb" onclick="showRoutine('fb')">
+        <div class="card-icon">🔥</div>
+        <h2>Full Body</h2>
+        <p>3 days/week</p>
+      </div>
+
+    </section>
+
+    <!-- Detail panel — hidden until a card is clicked -->
+    <section class="detail" id="detail">
+      <h2 id="detail-title">Routine Name</h2>
+      <p id="detail-desc">Description goes here.</p>
+      <ul id="detail-days"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

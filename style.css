@@ -1,0 +1,174 @@
+/* ── Reset & base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 4rem;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+header h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #ff8800;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #aaaaaa;
+}
+
+/* ── Main container ───────────────────────────────────────── */
+main {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* ── Card grid ────────────────────────────────────────────── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* ── Individual card ──────────────────────────────────────── */
+.card {
+  background: linear-gradient(145deg, #ff8800, #cc5500);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(255, 136, 0, 0.3);
+
+  /* smooth transitions for hover effects */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 10px 32px rgba(255, 136, 0, 0.55);
+}
+
+/* active state gives a quick "press" feel */
+.card:active {
+  transform: scale(0.98);
+}
+
+/* highlight the currently selected card */
+.card.active {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+/* ── Detail panel ─────────────────────────────────────────── */
+.detail {
+  width: 100%;
+  background: #1e1e1e;
+  border-left: 4px solid #ff9d2d;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+  /* hidden by default; JS adds .visible to show it */
+  display: none;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* when JS adds .visible the panel fades in */
+.detail.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* small trick: browsers need a frame to start the transition */
+.detail.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.detail h2 {
+  font-size: 1.6rem;
+  color: #ff8800;
+  margin-bottom: 0.75rem;
+}
+
+.detail p {
+  line-height: 1.7;
+  color: #cccccc;
+  margin-bottom: 1.2rem;
+}
+
+/* schedule list inside the detail panel */
+#detail-days {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#detail-days li {
+  background: #2a2a2a;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  color: #eeeeee;
+}
+
+#detail-days li span {
+  color: #ff8800;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+/* ── Responsive tweaks ────────────────────────────────────── */
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem 1rem;
+  }
+
+  .detail {
+    padding: 1.5rem 1rem;
+  }
+}
