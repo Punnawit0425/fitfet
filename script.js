@@ -14,6 +14,38 @@ const routines = {
       "Day 6 — Pull: Barbell Row, Pull-Ups, Bicep Curls",
       "Day 7 — Legs: Squat, Romanian Deadlift, Leg Press"
     ],
+
+    // Detailed per-day breakdown shown in the PPL detail section
+    dayDetails: [
+      {
+        name: "Push Day",
+        description: "Push trains chest, shoulders, and triceps — all the muscles involved in pressing and pushing movements.",
+        muscles: [
+          { group: "Chest",     exercises: ["Bench Press", "Incline Dumbbell Press", "Chest Fly"] },
+          { group: "Shoulders", exercises: ["Shoulder Press", "Lateral Raise"] },
+          { group: "Triceps",   exercises: ["Triceps Pushdown", "Overhead Triceps Extension"] }
+        ]
+      },
+      {
+        name: "Pull Day",
+        description: "Pull trains back, rear delts, and biceps — all the muscles involved in pulling and rowing movements.",
+        muscles: [
+          { group: "Back",       exercises: ["Lat Pulldown", "Pull-up", "Seated Row", "Barbell Row"] },
+          { group: "Rear Delts", exercises: ["Face Pull", "Rear Delt Fly"] },
+          { group: "Biceps",     exercises: ["Barbell Curl", "Hammer Curl", "Preacher Curl"] }
+        ]
+      },
+      {
+        name: "Leg Day",
+        description: "Legs trains quads, hamstrings, glutes, and calves — the entire lower body in one session.",
+        muscles: [
+          { group: "Quads",       exercises: ["Squat", "Leg Press", "Leg Extension"] },
+          { group: "Hamstrings",  exercises: ["Romanian Deadlift", "Leg Curl"] },
+          { group: "Glutes",      exercises: ["Hip Thrust", "Walking Lunge"] },
+          { group: "Calves",      exercises: ["Standing Calf Raise", "Seated Calf Raise"] }
+        ]
+      }
+    ]
   },
 
   ul: {
@@ -28,6 +60,31 @@ const routines = {
       "Day 5 — Lower: Deadlift, Leg Press, Lunges, Leg Curl",
       "Days 6–7 — Rest",
     ],
+
+    // Detailed per-day breakdown for Upper Lower
+    dayDetails: [
+      {
+        name: "Upper Day",
+        description: "Upper trains chest, back, shoulders, and arms — the entire upper body in one session.",
+        muscles: [
+          { group: "Chest",    exercises: ["Bench Press", "Incline Dumbbell Press"] },
+          { group: "Back",     exercises: ["Pull-Up", "Barbell Row", "Cable Row"] },
+          { group: "Shoulders",exercises: ["Overhead Press", "Lateral Raise"] },
+          { group: "Biceps",   exercises: ["Barbell Curl", "Hammer Curl"] },
+          { group: "Triceps",  exercises: ["Triceps Pushdown", "Skull Crusher"] }
+        ]
+      },
+      {
+        name: "Lower Day",
+        description: "Lower trains quads, hamstrings, glutes, and calves — the entire lower body in one session.",
+        muscles: [
+          { group: "Quads",      exercises: ["Squat", "Leg Press", "Leg Extension"] },
+          { group: "Hamstrings", exercises: ["Romanian Deadlift", "Leg Curl"] },
+          { group: "Glutes",     exercises: ["Hip Thrust", "Walking Lunge"] },
+          { group: "Calves",     exercises: ["Standing Calf Raise", "Seated Calf Raise"] }
+        ]
+      }
+    ]
   },
 
   fb: {
@@ -40,6 +97,23 @@ const routines = {
       "Day 3 (Fri) — Squat variation, Dips, Dumbbell Row, Cardio",
       "Days 2, 4, 6–7 — Rest & Recovery",
     ],
+
+    // Full Body hits every muscle group every session — one template covers all three days
+    dayDetails: [
+      {
+        name: "Full Body Session",
+        description: "Every session trains all major muscle groups. You rotate exercise variations each day to keep training fresh and build overall strength.",
+        muscles: [
+          { group: "Quads & Glutes", exercises: ["Squat", "Leg Press", "Lunge"] },
+          { group: "Hamstrings",     exercises: ["Deadlift", "Romanian Deadlift", "Leg Curl"] },
+          { group: "Chest",          exercises: ["Bench Press", "Incline Dumbbell Press", "Dips"] },
+          { group: "Back",           exercises: ["Pull-Up", "Barbell Row", "Dumbbell Row"] },
+          { group: "Shoulders",      exercises: ["Overhead Press", "Lateral Raise"] },
+          { group: "Arms",           exercises: ["Barbell Curl", "Triceps Pushdown"] },
+          { group: "Core",           exercises: ["Plank", "Ab Wheel", "Cable Crunch"] }
+        ]
+      }
+    ]
   },
 };
 
@@ -96,4 +170,61 @@ function showRoutine(key) {
 
   // Scroll the panel into view smoothly so the user sees it on mobile
   panel.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  // ── Day-by-day detail section ─────────────────────────────────
+  // Build the muscle breakdown for any routine that has dayDetails.
+  // Always clear first so switching routines shows fresh content.
+  const routineDetail = document.getElementById("routine-detail");
+  routineDetail.innerHTML = "";
+
+  if (routine.dayDetails) {
+    // Loop over each day entry (varies by routine)
+    routine.dayDetails.forEach(function (day) {
+
+      // Outer block for one training day
+      const dayBlock = document.createElement("div");
+      dayBlock.className = "day-block";
+
+      // Day name heading (e.g. "Push Day")
+      const dayTitle = document.createElement("h3");
+      dayTitle.className = "day-title";
+      dayTitle.textContent = day.name;
+      dayBlock.appendChild(dayTitle);
+
+      // Short description of what that day trains
+      const dayDesc = document.createElement("p");
+      dayDesc.className = "day-desc";
+      dayDesc.textContent = day.description;
+      dayBlock.appendChild(dayDesc);
+
+      // Row of muscle-group mini-cards
+      const muscleGroups = document.createElement("div");
+      muscleGroups.className = "muscle-groups";
+
+      day.muscles.forEach(function (muscle) {
+        // One card per muscle group
+        const muscleCard = document.createElement("div");
+        muscleCard.className = "muscle-card";
+
+        // Muscle group label (e.g. "Chest")
+        const groupName = document.createElement("h4");
+        groupName.textContent = muscle.group;
+        muscleCard.appendChild(groupName);
+
+        // List of exercises for that muscle group
+        const exerciseList = document.createElement("ul");
+        muscle.exercises.forEach(function (exercise) {
+          const item = document.createElement("li");
+          item.textContent = exercise;
+          exerciseList.appendChild(item);
+        });
+        muscleCard.appendChild(exerciseList);
+
+        muscleGroups.appendChild(muscleCard);
+      });
+
+      dayBlock.appendChild(muscleGroups);
+      routineDetail.appendChild(dayBlock);
+    });
+  }
 }
