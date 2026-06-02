@@ -9,7 +9,10 @@ const routines = {
       "Day 1 — Push: Bench Press, Overhead Press, Tricep Dips",
       "Day 2 — Pull: Barbell Row, Pull-Ups, Bicep Curls",
       "Day 3 — Legs: Squat, Romanian Deadlift, Leg Press",
-      "Day 4 — Rest (or repeat cycle for 6-day version)",
+      "Day 4 — Rest ",
+      "Day 5 — Push: Bench Press, Overhead Press, Tricep Dips",
+      "Day 6 — Pull: Barbell Row, Pull-Ups, Bicep Curls",
+      "Day 7 — Legs: Squat, Romanian Deadlift, Leg Press"
     ],
   },
 
